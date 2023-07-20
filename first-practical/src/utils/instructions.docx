@@ -1,0 +1,14 @@
+Hello,
+
+Please review the shared JSON Carefully and clarify below task points before start working on it.
+
+Task List:- 
+- Need to show an List of News Feed Item with key based data "description", "title", "imageURL" and Read More button with "url" link which is present in JSON Data.
+
+
+
+- The NewsFeed list should be in group of order list following by "Bloomberg", "Reuters" and "CNBC" type which is present on "source" key of JSON data.
+
+- Need to add Dropdown Sorting with Search Box to filter the list on based of "source" value.
+
+
