@@ -1,0 +1,19 @@
+.newsfeedListItem {
+  border: 0.5px solid grey;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.newsfeedList {
+  padding-left: 0;
+}
+
+.searchInput {
+  margin: 15px 0px;
+  height: 30px;
+}
+
+.selectTitle {
+  height: 30px;
+  margin-left: 5px;
+}

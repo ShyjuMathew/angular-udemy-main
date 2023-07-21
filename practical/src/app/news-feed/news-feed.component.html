@@ -1,0 +1,35 @@
+<div class="newsfeedContainer">
+  <div class="sortingContainer">
+    <input
+      [(ngModel)]="inputValue"
+      (input)="onSearch()"
+      class="searchInput"
+      type="text"
+      placeholder="Search news..."
+    />
+    <select
+      class="selectTitle"
+      name="selectTitle"
+      id="titleSelect"
+      (change)="onSelect($event)"
+    >
+      <option value="">Select...</option>
+      <option value="reuters">Reuters</option>
+      <option value="bloomberg">Bloomberg</option>
+      <option value="cnbc">CNBC</option>
+    </select>
+  </div>
+  <ul class="newsfeedList">
+    <div class="newsfeedListItem" *ngFor="let item of newsList">
+      <h3 class="itemHeader">{{ item.source.name }}</h3>
+      <hr />
+      <span>{{ item.description }}</span>
+      <br />
+      <a *ngIf="item.imageUrl" href="{{ item.imageUrl }}" target="_blank"
+        >Image</a
+      >
+      <br />
+      <a *ngIf="item.url" href="{{ item.url }}" target="_blank">Read more...</a>
+    </div>
+  </ul>
+</div>
