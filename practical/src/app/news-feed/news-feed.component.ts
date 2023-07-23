@@ -10,6 +10,7 @@ import { NewsItem } from './news-interface.interface';
 export class NewsFeedComponent implements OnInit {
   newsList: NewsItem[] = [];
   inputValue: string = '';
+  selectedTitle = '';
 
   customSort = (a: NewsItem, b: NewsItem) => {
     const sourceOrder: any = { Bloomberg: 1, Reuters: 2, CNBC: 3 };
@@ -27,19 +28,23 @@ export class NewsFeedComponent implements OnInit {
     }
   };
 
-  constructor(private jsonData: JsonDataService) {}
+  constructor(private jsonData: JsonDataService) { }
 
   ngOnInit() {
     this.newsList = this.jsonData.jsonData.sort(this.customSort);
   }
 
   onSearch() {
-    this.newsList = this.jsonData.jsonData.filter((el) =>
-      el.description.toLowerCase().includes(this.inputValue.toLowerCase())
-    );
+    this.newsList = this.jsonData.jsonData.filter((el) => {
+      if (this.selectedTitle) {
+        return el.source.name.toUpperCase() === this.selectedTitle.toUpperCase() && el.description.toLowerCase().includes(this.inputValue.toLowerCase())
+      }
+      return el.description.toLowerCase().includes(this.inputValue.toLowerCase())
+    });
   }
 
   onSelect(value: any) {
+    this.selectedTitle = value.target.value
     if (value.target.value === '') {
       this.newsList = this.jsonData.jsonData.sort(this.customSort);
       return;

@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { CustomersComponent } from './customers/customers.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: NewsFeedComponent },
   { path: 'newsfeed', component: NewsFeedComponent },
   { path: 'customers', component: CustomersComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

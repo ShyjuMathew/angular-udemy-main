@@ -1,1 +1,7 @@
-<p>customers works!</p>
+<div class="customerContainer">
+    <ul class="customerList">
+        <div *ngFor="let customer of customerList" class="customerListItemContainer">
+            <li class="customerListItem">{{customer}}</li>
+        </div>
+    </ul>
+</div>
