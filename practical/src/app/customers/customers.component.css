@@ -1,0 +1,13 @@
+.customerList {
+  padding: 0px;
+}
+
+.customerListItemContainer {
+  border: 0.5px solid grey;
+  padding: 10px;
+  margin: 10px;
+}
+
+.customerListItem {
+  list-style-type: none;
+}

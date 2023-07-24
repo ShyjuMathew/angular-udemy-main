@@ -1,27 +1,34 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  styleUrls: ['./customers.component.css'],
 })
 export class CustomersComponent implements OnInit {
-  customerList = [];
+  isLoading = false;
+  customerList: any = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    const authKey = localStorage.getItem('authToken')
-    var header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${authKey}`)
-    }
+    this.isLoading = true;
 
-    this.http.post('https://lumen-lts.brainvire.dev/admin/api/v1/user/list', { length: '10' }, header)
-      .subscribe({
-        next: (res) => { console.log('Response: ', res) },
-        error: (err) => { console.log('Error: ', err) }
+    this.http
+      .post('https://lumen-lts.brainvire.dev/admin/api/v1/user/list', {
+        start: 0,
+        length: 10,
       })
+      .subscribe({
+        next: (res: any) => {
+          this.isLoading = false;
+          this.customerList = res.data.original.data;
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log('Error: ', err);
+        },
+      });
   }
 }

@@ -1,7 +1,15 @@
 <div class="customerContainer">
-    <ul class="customerList">
-        <div *ngFor="let customer of customerList" class="customerListItemContainer">
-            <li class="customerListItem">{{customer}}</li>
-        </div>
-    </ul>
+  <p class="loading" *ngIf="isLoading">Loading...</p>
+  <ul *ngIf="!isLoading && customerList.length > 0" class="customerList">
+    <div
+      *ngFor="let customer of customerList"
+      class="customerListItemContainer"
+    >
+      <li class="customerListItem">
+        <p class="name">{{ customer.fullname }}</p>
+        <p class="email">{{ customer.email }}</p>
+        <p class="number">{{ customer.phone_number }}</p>
+      </li>
+    </div>
+  </ul>
 </div>
