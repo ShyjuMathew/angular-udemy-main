@@ -1,6 +1,11 @@
 <div class="customerContainer">
   <p class="loading" *ngIf="isLoading">Loading...</p>
   <ul *ngIf="!isLoading && customerList.length > 0" class="customerList">
+    <div class="addButtonContainer">
+      <button class="addButton btn btn-primary" (click)="onAdd()">
+        Add New
+      </button>
+    </div>
     <div
       *ngFor="let customer of customerList"
       class="customerListItemContainer"
@@ -9,6 +14,7 @@
         <p class="name">{{ customer.fullname }}</p>
         <p class="email">{{ customer.email }}</p>
         <p class="number">{{ customer.phone_number }}</p>
+        <a class="editLink" (click)="onEdit(customer.id)">Edit</a>
       </li>
     </div>
   </ul>

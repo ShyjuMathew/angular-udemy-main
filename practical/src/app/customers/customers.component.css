@@ -11,3 +11,11 @@
 .customerListItem {
   list-style-type: none;
 }
+
+.editLink {
+  cursor: pointer;
+}
+
+.addButton {
+  margin: 10px;
+}
