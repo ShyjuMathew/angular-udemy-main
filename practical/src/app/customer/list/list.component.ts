@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css'],
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
 })
-export class CustomersComponent implements OnInit {
+export class ListComponent implements OnInit {
   isLoading = false;
   customerList: any = [];
 
@@ -40,10 +39,10 @@ export class CustomersComponent implements OnInit {
   }
 
   onEdit(id: number) {
-    this.router.navigate([`customers/edit/${id}`]);
+    this.router.navigate([`customer/edit/${id}`]);
   }
 
   onAdd() {
-    this.router.navigate([`customers/add`]);
+    this.router.navigate([`customer/add`]);
   }
 }

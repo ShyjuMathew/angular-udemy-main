@@ -1,13 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  ActivatedRoute,
-  Params,
-  Router,
-  RoutesRecognized,
-} from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit',
@@ -95,7 +89,7 @@ export class AddEditComponent implements OnInit {
         .subscribe({
           next: () => {
             this.isLoading = false;
-            this.router.navigate(['/customers']);
+            this.router.navigate(['/customer']);
           },
           error: (error) => {
             this.isLoading = false;
@@ -112,7 +106,7 @@ export class AddEditComponent implements OnInit {
         .subscribe({
           next: () => {
             this.isLoading = false;
-            this.router.navigate(['/customers']);
+            this.router.navigate(['/customer']);
           },
           error: (error) => {
             this.isLoading = false;
