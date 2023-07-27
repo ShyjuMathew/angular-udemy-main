@@ -1,11 +1,25 @@
 <div class="customerContainer">
-  <p class="loading" *ngIf="isLoading">Loading...</p>
+  <app-loader *ngIf="isLoading"></app-loader>
   <ul *ngIf="!isLoading && customerList.length > 0" class="customerList">
     <div class="addButtonContainer">
       <button class="addButton btn btn-primary" (click)="onAdd()">
         Add New
       </button>
     </div>
+    <div class="searchContainer">
+      <input type="text" class="searchInput" [(ngModel)]="searchText" />
+      <button class="searchBtn btn btn-primary" (click)="onSearch()">
+        Search by Name
+      </button>
+      <button class="resetBtn btn btn-warning" (click)="onSearch('reset')">
+        Reset
+      </button>
+    </div>
+
+    <app-input-output
+      (childAlertEvent)="childAlert($event)"
+      [value]="someValue"
+    ></app-input-output>
     <div
       *ngFor="let customer of customerList"
       class="customerListItemContainer"

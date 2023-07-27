@@ -1,4 +1,5 @@
 <div class="container">
+  <app-loader *ngIf="isLoading"></app-loader>
   <div class="row">
     <div class="col-md-6">
       <form [formGroup]="addEditForm" (ngSubmit)="onSubmit()">

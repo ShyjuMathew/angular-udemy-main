@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-add-edit',
@@ -19,7 +20,8 @@ export class AddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit() {
@@ -59,21 +61,22 @@ export class AddEditComponent implements OnInit {
   }
 
   getUserData(id: string) {
-    this.http
-      .get(`https://lumen-lts.brainvire.dev/admin/api/v1/user/show/${id}`)
-      .subscribe({
-        next: (res: any) => {
-          this.addEditForm.setValue({
-            first_name: res.data.first_name,
-            last_name: res.data.last_name,
-            username: res.data.username,
-            phone_number: res.data.phone_number,
-            email: res.data.email,
-            date_of_birth: res.data.date_of_birth,
-            gender: res.data.gender,
-          });
-        },
-      });
+    this.isLoading = true;
+    this.customerService.getEditData(id).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        this.addEditForm.setValue({
+          first_name: res.data.first_name,
+          last_name: res.data.last_name,
+          username: res.data.username,
+          phone_number: res.data.phone_number,
+          email: res.data.email,
+          date_of_birth: res.data.date_of_birth,
+          gender: res.data.gender,
+        });
+      },
+      error: () => (this.isLoading = false),
+    });
   }
 
   onSubmit() {
@@ -81,38 +84,28 @@ export class AddEditComponent implements OnInit {
     this.isLoading = true;
     if (this.addEditForm.status === 'VALID' && !this.editForm) {
       delete this.addEditForm.value.confirmPassword;
-      this.http
-        .post(
-          'https://lumen-lts.brainvire.dev/admin/api/v1/user/create',
-          this.addEditForm.value
-        )
-        .subscribe({
-          next: () => {
-            this.isLoading = false;
-            this.router.navigate(['/customer']);
-          },
-          error: (error) => {
-            this.isLoading = false;
-            console.log('Response: ', error);
-          },
-        });
+      this.customerService.addData(this.addEditForm.value).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/customer']);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.log('Response: ', error);
+        },
+      });
     }
     if (this.addEditForm.status === 'VALID' && this.editForm) {
-      this.http
-        .post(
-          `https://lumen-lts.brainvire.dev/admin/api/v1/user/update/${this.id}`,
-          this.addEditForm.value
-        )
-        .subscribe({
-          next: () => {
-            this.isLoading = false;
-            this.router.navigate(['/customer']);
-          },
-          error: (error) => {
-            this.isLoading = false;
-            console.log('Response: ', error);
-          },
-        });
+      this.customerService.editData(this.id, this.addEditForm.value).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/customer']);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.log('Response: ', error);
+        },
+      });
     }
     if (this.addEditForm.status === 'INVALID') {
       this.isLoading = false;

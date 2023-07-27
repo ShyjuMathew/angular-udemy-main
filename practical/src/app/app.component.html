@@ -8,7 +8,7 @@
         >
           <a routerLink="newsfeed">NewsFeed</a>
         </li>
-        <li routerLinkActive="active">
+        <li *ngIf="isLoggedIn()" routerLinkActive="active">
           <a routerLink="customer">CustomerList</a>
         </li>
         <li routerLinkActive="active">

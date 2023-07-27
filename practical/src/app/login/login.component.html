@@ -1,4 +1,5 @@
 <div class="loginContainer">
+  <app-loader *ngIf="isSubmitting"></app-loader>
   <form (ngSubmit)="onSubmit()" #f="ngForm">
     <div id="user-data">
       <div class="form-group">

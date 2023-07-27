@@ -7,15 +7,23 @@ import { ListComponent } from './list/list.component';
 import { AddEditComponent } from './add-edit/add-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InputOutputComponent } from '../input-output/input-output.component';
+import { LoaderModule } from '../ui/loader/loader.module';
 
 @NgModule({
-  declarations: [CustomerComponent, ListComponent, AddEditComponent],
+  declarations: [
+    CustomerComponent,
+    ListComponent,
+    AddEditComponent,
+    InputOutputComponent,
+  ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    LoaderModule,
   ],
 })
 export class CustomerModule {}

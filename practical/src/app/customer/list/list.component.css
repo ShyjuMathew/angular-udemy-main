@@ -19,3 +19,8 @@
 .addButton {
   margin: 10px;
 }
+
+.searchContainer input,
+button {
+  margin: 10px;
+}

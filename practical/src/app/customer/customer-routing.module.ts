@@ -11,9 +11,17 @@ const routes: Routes = [
     component: CustomerComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'list', component: ListComponent },
-      { path: 'add', component: AddEditComponent },
-      { path: 'edit/:id', component: AddEditComponent },
+      { path: 'list', component: ListComponent, canActivate: [AuthGuard] },
+      {
+        path: 'add',
+        component: AddEditComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit/:id',
+        component: AddEditComponent,
+        canActivate: [AuthGuard],
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
     ],
   },

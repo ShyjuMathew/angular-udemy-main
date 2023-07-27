@@ -7,7 +7,9 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { AuthInterceptor } from './auth-interceptor';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { ErrorInterceptor } from './interceptors/error-interceptor';
+import { LoaderModule } from './ui/loader/loader.module';
 
 @NgModule({
   declarations: [AppComponent, NewsFeedComponent, LoginComponent],
@@ -17,9 +19,11 @@ import { AuthInterceptor } from './auth-interceptor';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    LoaderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
